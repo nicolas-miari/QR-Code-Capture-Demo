@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RMA-PD-LF6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--QR Capture Demo-->
+        <scene sceneID="Bvc-CE-IGc">
+            <objects>
+                <viewController id="VHT-ap-5Fb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L1y-hq-LTL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upm-mg-MkR">
+                                <rect key="frame" x="99" y="350.5" width="176" height="30"/>
+                                <state key="normal" title="Launch QR Code Scanner"/>
+                                <connections>
+                                    <segue destination="XuE-l8-ZXt" kind="presentation" id="gyA-zE-azZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="upm-mg-MkR" firstAttribute="centerY" secondItem="s9w-m9-IhJ" secondAttribute="centerY" id="E7h-4n-L6h"/>
+                            <constraint firstItem="upm-mg-MkR" firstAttribute="centerX" secondItem="s9w-m9-IhJ" secondAttribute="centerX" id="qVh-ND-fX9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="s9w-m9-IhJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="QR Capture Demo" id="Exv-2l-sBy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mF3-sb-bRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-316" y="129.98500749625188"/>
+        </scene>
+        <!--Scan-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CaptureViewController" customModule="QRCaptureDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Pvp-V1-4hw" appends="YES" id="qif-AX-1jF"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scan" id="raj-kV-5er">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="5AV-sx-B3e">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="ldE-4R-4hh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Pvp-V1-4hw">
+                    <connections>
+                        <segue destination="OkR-8X-OEZ" kind="show" identifier="ShowResults" id="Zy0-3V-nhw"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="478" y="878"/>
+        </scene>
+        <!--Results-->
+        <scene sceneID="rw0-FH-ink">
+            <objects>
+                <tableViewController id="OkR-8X-OEZ" customClass="ResultsViewController" customModule="QRCaptureDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sMB-8Y-Hca">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="Uhc-7F-NfV" detailTextLabel="nqb-Wv-RgF" style="IBUITableViewCellStyleSubtitle" id="0Ez-rX-52z">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Ez-rX-52z" id="Zku-uc-wVs">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uhc-7F-NfV">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nqb-Wv-RgF">
+                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="es6-wP-5uo" kind="show" id="4sj-Kj-mcu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OkR-8X-OEZ" id="tbq-5d-e6U"/>
+                            <outlet property="delegate" destination="OkR-8X-OEZ" id="yAh-Bq-PKR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Results" id="Z8k-Hb-1yS"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBY-Ff-tt1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="878"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Wms-0V-KEV">
+            <objects>
+                <viewController id="es6-wP-5uo" customClass="WebViewController" customModule="QRCaptureDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yf3-Ih-aH6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="6nA-e5-9SU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hB6-kf-hPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1993" y="878"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AXP-Yt-O7h">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RMA-PD-LF6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Wa9-yK-6V3">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VHT-ap-5Fb" kind="relationship" relationship="rootViewController" id="bhV-u6-BZG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dxD-Ay-ZJ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1094" y="130"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1oT-DL-sJv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XuE-l8-ZXt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8b0-FV-pRu">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tn5-Tl-A34"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hpi-MI-oc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="478.39999999999998" y="129.53523238380811"/>
+        </scene>
+    </scenes>
+</document>
