@@ -10,21 +10,29 @@ import UIKit
 import WebKit
 import SafariServices
 
-class WebViewController: UIViewController, WKUIDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate {
 
     var webView: WKWebView!
+
+    weak var spinner: UIActivityIndicatorView!
 
     var url: URL!
 
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
+        webView.navigationDelegate = self
         self.view = webView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        spinner.center = self.view.center
+        spinner.hidesWhenStopped = true
+        self.view.addSubview(spinner)
+        self.spinner = spinner
 
         // Do any additional setup after loading the view.
     }
@@ -40,5 +48,13 @@ class WebViewController: UIViewController, WKUIDelegate {
         if let navigation = webView.load(URLRequest(url: url)) {
             print(navigation)
         }
+    }
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        spinner.startAnimating()
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        spinner.stopAnimating()
     }
 }

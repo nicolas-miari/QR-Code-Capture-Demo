@@ -18,6 +18,9 @@ import AVFoundation
  */
 class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
+    ///
+    @IBOutlet weak var proceedButton: UIButton!
+
     private var codeObjects = [AVMetadataObject]()
 
     /**
@@ -35,6 +38,22 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        //proceedButton.layer.borderWidth = 1.0
+        //proceedButton.layer.borderColor = UIColor.white.cgColor
+        proceedButton.layer.cornerRadius = 10
+        proceedButton.layer.masksToBounds = true
+
+        proceedButton.setTitleColor(UIColor.darkGray, for: .normal)
+        proceedButton.setBackgroundColor(UIColor.white, for: .normal)
+
+        proceedButton.setTitleColor(UIColor.white, for: .highlighted)
+        proceedButton.setBackgroundColor(UIColor.black, for: .highlighted)
+
+        proceedButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        proceedButton.setBackgroundColor(UIColor.white, for: .disabled)
+
+        proceedButton.isEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +90,10 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func proceed(_ sender: UIButton) {
+        
     }
 
     // MARK: - Internal Operation
@@ -116,7 +139,7 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.frame = self.view.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        self.view.layer.addSublayer(previewLayer)
+        self.view.layer.insertSublayer(previewLayer, at: 0)
         self.previewLayer = previewLayer
 
         if let targetLayer = self.targetLayer {
@@ -124,7 +147,7 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         let targetLayer = CALayer()
         targetLayer.frame = self.view.bounds
-        self.view.layer.addSublayer(targetLayer)
+        self.view.layer.insertSublayer(targetLayer, above: previewLayer)
         self.targetLayer = targetLayer
     }
 
@@ -193,8 +216,25 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         })
         self.codeObjects = newObjects
 
+        self.proceedButton.isEnabled = (newObjects.count > 0)
+
         self.clearTargetLayer()
         self.showDetected(objects: newObjects)
+    }
+}
+
+/**
+ Taken from here: https://stackoverflow.com/a/44325883/433373
+ */
+extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControlState) {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        color.setFill()
+        UIRectFill(rect)
+        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        setBackgroundImage(colorImage, for: state)
     }
 }
 
