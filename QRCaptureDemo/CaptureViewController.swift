@@ -180,7 +180,7 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             shapeLayer.strokeColor = UIColor.red.cgColor
             shapeLayer.lineWidth = 10
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.lineJoin = kCALineJoinRound
+            shapeLayer.lineJoin = CAShapeLayerLineJoin.round
             shapeLayer.path = pathWithPoints(object.corners)
 
             targetLayer?.addSublayer(shapeLayer)
@@ -211,7 +211,7 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         self.codeObjects.removeAll()
 
-        let newObjects = metadataObjects.flatMap({ object in
+        let newObjects = metadataObjects.compactMap({ object in
             return self.previewLayer?.transformedMetadataObject(for: object)
         })
         self.codeObjects = newObjects
@@ -227,7 +227,7 @@ class CaptureViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
  Taken from here: https://stackoverflow.com/a/44325883/433373
  */
 extension UIButton {
-    func setBackgroundColor(_ color: UIColor, for state: UIControlState) {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         color.setFill()

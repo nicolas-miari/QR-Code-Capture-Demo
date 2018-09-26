@@ -71,7 +71,7 @@ class ResultsViewController: UITableViewController {
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
             return false
         }
-        let range = NSMakeRange(0, stringValue.characters.count)
+        let range = NSMakeRange(0, stringValue.count)
         let matchCount = detector.numberOfMatches(in: stringValue, options: [], range: range)
 
         return matchCount > 0
@@ -84,9 +84,9 @@ class ResultsViewController: UITableViewController {
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
             return nil
         }
-        let range = NSMakeRange(0, stringValue.characters.count)
+        let range = NSMakeRange(0, stringValue.count)
         let matches = detector.matches(in: stringValue, options: [], range: range)
 
-        return matches.flatMap{ $0.url }.first
+        return matches.compactMap{ $0.url }.first
     }
 }
